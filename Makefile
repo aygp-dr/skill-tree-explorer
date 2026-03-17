@@ -7,10 +7,10 @@ setup: ## Install dependencies
 	pip install -r requirements.txt
 
 run: ## Run the app
-	python main.py
+	python3 main.py
 
 test: ## Run tests
-	python -m pytest tests/ -v
+	python3 -m pytest tests/ -v
 
 lint: ## Run ruff linter
 	ruff check main.py tests/

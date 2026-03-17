@@ -1,0 +1,83 @@
+#+TITLE: Skill Tree Explorer
+#+AUTHOR: aygp-dr
+#+OPTIONS: toc:2
+
+* Skill Tree Explorer
+
+Interactive skill tree visualization and progress tracking. Built with Flask.
+
+[[https://github.com/aygp-dr/skill-tree-explorer/actions/workflows/ci.yml][https://github.com/aygp-dr/skill-tree-explorer/actions/workflows/ci.yml/badge.svg]]
+
+** Features
+
+- *3 skill trees*: Backend Engineering, Frontend Engineering, DevOps & Infrastructure
+- *Dependency-based unlocking*: skills lock until prerequisites are completed
+- *Progress tracking*: per-tree completion percentage with SQLite persistence
+- *Visual progress bar*: dark-themed UI with level-based skill layout
+- *JSON API*: ~/api/trees~ and ~/api/tree/<id>~ endpoints
+- *Replit-ready*: auto-detected ~.replit~ configuration
+
+** Quick Start
+
+#+begin_src bash
+pip install -r requirements.txt
+make run
+#+end_src
+
+The app runs on ~http://localhost:8080~ by default.
+
+** API
+
+| Endpoint             | Method | Description                          |
+|----------------------+--------+--------------------------------------|
+| ~/~                  | GET    | Main UI with skill tree visualization |
+| ~/~                  | POST   | Toggle skill completion              |
+| ~/api/trees~         | GET    | List all trees (id -> name)          |
+| ~/api/tree/<id>~     | GET    | Tree details with completion status  |
+
+** Development
+
+*** Setup
+
+#+begin_src bash
+make setup
+#+end_src
+
+*** Run Tests
+
+#+begin_src bash
+make test
+#+end_src
+
+*** Lint
+
+#+begin_src bash
+make lint
+#+end_src
+
+*** Format Code
+
+#+begin_src bash
+make format
+#+end_src
+
+*** All Targets
+
+#+begin_src bash
+make help
+#+end_src
+
+** Stack
+
+- Python 3.11+
+- Flask
+- SQLite (auto-created in ~data/~)
+- Vanilla CSS (dark theme, no frameworks)
+- pytest + ruff for testing and linting
+- GitHub Actions CI
+
+** Deploy on Replit
+
+1. Fork this repo on Replit
+2. It auto-detects the ~.replit~ config
+3. Click Run

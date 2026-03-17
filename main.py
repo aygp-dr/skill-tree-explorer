@@ -4,7 +4,6 @@ A Flask web app for Replit deployment. Lets users visualize skill trees,
 track progress, and discover learning paths.
 """
 
-import json
 import os
 import sqlite3
 from datetime import datetime
@@ -16,6 +15,8 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "dev-key-change-in-production")
 
 DB_PATH = Path("data/skills.db")
+
+app.config.setdefault("DB_PATH", str(DB_PATH))
 
 # Skill tree data (embedded for Replit simplicity)
 SKILL_TREES = {
@@ -63,8 +64,9 @@ SKILL_TREES = {
 
 def get_db():
     if "db" not in g:
-        DB_PATH.parent.mkdir(exist_ok=True)
-        g.db = sqlite3.connect(str(DB_PATH))
+        db_path = Path(app.config["DB_PATH"])
+        db_path.parent.mkdir(exist_ok=True)
+        g.db = sqlite3.connect(str(db_path))
         g.db.row_factory = sqlite3.Row
         g.db.execute("""
             CREATE TABLE IF NOT EXISTS progress (
